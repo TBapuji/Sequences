@@ -8,25 +8,31 @@ namespace Sequence
 {
     public class PrimeNumber
     {
-        public static List<int> Retrieve(int numberOfPrimeNumbers)
+        public static int[] Retrieve(int numberOfPrimeNumbers)
         {
-            List<int> primeNumbers = new List<int>();
-            primeNumbers.Add(2);
+            int[] primeNumbers = new int[numberOfPrimeNumbers];
+            primeNumbers[0] = 2;
             int i = 1;
+            int j = 0;
+            int p = 0;
             bool assignPM = false;
             while(true)
             {
                 i++;
-                foreach(int primeNumber in primeNumbers)
+                for(int arrayIndex = 0; arrayIndex < primeNumbers.Length; arrayIndex++)
                 {
                     assignPM = true;
-                    if(i % primeNumber == 0) { assignPM = false; break; }
+                    p = primeNumbers[arrayIndex];
+                    if(p == 0 ) { break; }
+                    else if(i % p == 0) { assignPM = false; break; }
+                    
                 }
                 if(assignPM) 
-                { 
-                    primeNumbers.Add(i);
-                    if(primeNumbers.Count == numberOfPrimeNumbers) break;
-                }
+                {                    
+                    if(j +1 >= numberOfPrimeNumbers) break;
+                    j += 1;
+                    primeNumbers[j] = i;
+                }               
             }
             return primeNumbers;
         }
